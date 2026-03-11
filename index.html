@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Occitan Pro – Club d'entrepreneurs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --red: #c0392b;
+      --red-soft: #e74c3c;
+      --red-light: #fdecea;
+      --red-accent: #d45a50;
+      --black: #1a1a1a;
+      --gray: #555;
+      --gray-light: #f5f5f5;
+      --white: #fff;
+      --header-h: 70px;
+      --radius: 10px;
+      --shadow: 0 4px 20px rgba(0,0,0,0.08);
+      --transition: 0.3s ease;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      font-size: 15px;
+      color: var(--black);
+      background: var(--white);
+      line-height: 1.7;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--header-h);
+      background: var(--white);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+    }
+
+    .header-logo {
+      height: 48px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    nav a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--black);
+      padding: 7px 14px;
+      border-radius: 6px;
+      transition: background var(--transition), color var(--transition);
+    }
+
+    nav a:hover,
+    nav a.active {
+      background: var(--red-light);
+      color: var(--red);
+    }
+
+    .burger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 6px;
+      background: none;
+      border: none;
+    }
+
+    .burger span {
+      display: block;
+      width: 26px;
+      height: 2px;
+      background: var(--black);
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+
+    .burger.open span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .burger.open span:nth-child(2) {
+      opacity: 0;
+    }
+    .burger.open span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* Mobile nav */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: var(--header-h);
+      left: 0;
+      right: 0;
+      background: var(--white);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      z-index: 999;
+      flex-direction: column;
+      padding: 16px 20px 24px;
+      gap: 4px;
+    }
+
+    .mobile-nav.open {
+      display: flex;
+    }
+
+    .mobile-nav a {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--black);
+      padding: 12px 16px;
+      border-radius: 8px;
+      transition: background var(--transition), color var(--transition);
+    }
+
+    .mobile-nav a:hover {
+      background: var(--red-light);
+      color: var(--red);
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      position: relative;
+      height: 400px;
+      overflow: hidden;
+      margin-top: var(--header-h);
+    }
+
+    .hero-slides {
+      position: absolute;
+      inset: 0;
+    }
+
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    .hero-slide.active {
+      opacity: 1;
+    }
+
+    .hero-slide:nth-child(1) { background-image: url('assets/hero1.jpg'); }
+    .hero-slide:nth-child(2) { background-image: url('assets/hero2.jpg'); }
+    .hero-slide:nth-child(3) { background-image: url('assets/hero3.jpg'); }
+    .hero-slide:nth-child(4) { background-image: url('assets/hero4.jpg'); }
+    .hero-slide:nth-child(5) { background-image: url('assets/hero5.jpg'); }
+    .hero-slide:nth-child(6) { background-image: url('assets/hero6.png'); }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(26,26,26,0.68) 0%, rgba(192,57,43,0.6) 100%);
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 24px 20px;
+    }
+
+    .hero-content h1 {
+      color: var(--white);
+      font-size: clamp(1.5rem, 4vw, 2.6rem);
+      font-weight: 700;
+      line-height: 1.3;
+      max-width: 700px;
+      text-shadow: 0 2px 14px rgba(0,0,0,0.4);
+    }
+
+    .hero-content h1 span {
+      color: #f0a09a;
+    }
+
+    /* ===== SECTIONS GENERAL ===== */
+    section {
+      padding: 70px 20px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-tag {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--red-accent);
+      background: var(--red-light);
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 700;
+      margin-bottom: 16px;
+      line-height: 1.3;
+    }
+
+    .section-text {
+      color: var(--gray);
+      font-size: 15px;
+      max-width: 520px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 26px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--red);
+      color: var(--white);
+    }
+
+    .btn-primary:hover {
+      background: #a93226;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(192,57,43,0.3);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--red);
+      border: 2px solid var(--red);
+    }
+
+    .btn-outline:hover {
+      background: var(--red-light);
+      transform: translateY(-2px);
+    }
+
+    /* ===== SECTION 1 – PRINCIPE ===== */
+    #principe {
+      background: var(--gray-light);
+    }
+
+    .principe-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .principe-image {
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      aspect-ratio: 4/3;
+    }
+
+    .principe-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .principe-text .section-text {
+      margin-bottom: 28px;
+    }
+
+    /* ===== SECTION 2 – ENTREPRENEURS ===== */
+    #entrepreneurs {
+      background: var(--white);
+    }
+
+    .entrepreneurs-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .entrepreneurs-header .section-text {
+      margin: 0 auto;
+    }
+
+    .cards-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-bottom: 48px;
+    }
+
+    .card {
+      display: grid;
+      grid-template-columns: 1fr;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background: var(--white);
+      border: 1px solid #eee;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+    }
+
+    .card-photo {
+      aspect-ratio: 16/9;
+      overflow: hidden;
+    }
+
+    .card-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .card-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      border-bottom: 1px solid #f0f0f0;
+      background: var(--gray-light);
+    }
+
+    .card-logo img {
+      width: 90px;
+      height: 90px;
+      object-fit: contain;
+    }
+
+    .card-logo-placeholder {
+      width: 80px;
+      height: 60px;
+      background: #ddd;
+      border-radius: 6px;
+    }
+
+    .card-body {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .card-body h3 {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .card-body p {
+      font-size: 14px;
+      color: var(--gray);
+      flex: 1;
+    }
+
+    .entrepreneurs-cta {
+      text-align: center;
+    }
+
+    .btn-pulse {
+      animation: pulse 2.4s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 4px 15px rgba(192,57,43,0.2); }
+      50% { transform: scale(1.04); box-shadow: 0 8px 28px rgba(192,57,43,0.35); }
+    }
+
+    .btn-pulse:hover {
+      animation: none;
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 8px 24px rgba(192,57,43,0.35);
+    }
+
+    /* ===== SECTION 3 – CONTACT ===== */
+    #contact {
+      background: var(--gray-light);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .contact-image {
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      aspect-ratio: 4/3;
+    }
+
+    .contact-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .contact-text .section-text {
+      margin-bottom: 28px;
+    }
+
+    .contact-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--black);
+      color: #aaa;
+      padding: 40px 20px;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      align-items: center;
+      text-align: center;
+    }
+
+    .footer-name {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .footer-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 6px 20px;
+    }
+
+    .footer-nav a {
+      font-size: 13px;
+      color: #aaa;
+      transition: color var(--transition);
+    }
+
+    .footer-nav a:hover {
+      color: var(--white);
+    }
+
+    .footer-copy {
+      font-size: 12px;
+      color: #666;
+    }
+
+    /* ===== TABLET ===== */
+    @media (min-width: 640px) {
+      section {
+        padding: 80px 32px;
+      }
+
+      .card {
+        grid-template-columns: 220px 160px 1fr;
+      }
+
+      .card-photo {
+        aspect-ratio: auto;
+      }
+
+      .card-logo {
+        border-bottom: none;
+        border-right: 1px solid #f0f0f0;
+        border-left: 1px solid #f0f0f0;
+      }
+
+      .footer-inner {
+        flex-direction: row;
+        justify-content: space-between;
+        text-align: left;
+        align-items: flex-start;
+      }
+    }
+
+    /* ===== DESKTOP ===== */
+    @media (min-width: 960px) {
+      header {
+        padding: 0 48px;
+      }
+
+      .hero {
+        height: 480px;
+      }
+
+      section {
+        padding: 100px 48px;
+      }
+
+      .principe-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 64px;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 64px;
+      }
+
+      .burger {
+        display: none !important;
+      }
+
+      .mobile-nav,
+      .mobile-nav.open {
+        display: none !important;
+      }
+
+      nav {
+        display: flex !important;
+      }
+    }
+
+    @media (max-width: 959px) {
+      nav {
+        display: none;
+      }
+
+      .burger {
+        display: flex;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header>
+    <a href="index.html">
+      <img src="assets/logo.jpg" alt="Logo Occitan Pro" class="header-logo" />
+    </a>
+    <nav>
+      <a href="index.html" class="active">Accueil</a>
+      <a href="principe.html">Principe</a>
+      <a href="entreprises.html">Entreprises</a>
+      <a href="contact.html">Contacter le club</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+
+  <!-- Mobile nav -->
+  <nav class="mobile-nav" id="mobileNav">
+    <a href="index.html">Accueil</a>
+    <a href="principe.html">Principe</a>
+    <a href="entreprises.html">Entreprises</a>
+    <a href="contact.html">Contacter le club</a>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" aria-label="Bandeau principal">
+    <div class="hero-slides">
+      <div class="hero-slide active"></div>
+      <div class="hero-slide"></div>
+      <div class="hero-slide"></div>
+      <div class="hero-slide"></div>
+      <div class="hero-slide"></div>
+      <div class="hero-slide"></div>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>
+        <span>Occitan Pro,</span> le club où les affaires et la satisfaction des clients sont en croissance permanente
+      </h1>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 1 – PRINCIPE ===== -->
+  <section id="principe">
+    <div class="container">
+      <div class="principe-grid">
+        <div class="principe-image">
+          <img src="assets/affaires.jpg" alt="Réunion Occitan Pro" />
+        </div>
+        <div class="principe-text">
+          <span class="section-tag">Notre fonctionnement</span>
+          <h2 class="section-title">Un club pensé pour faire grandir vos affaires</h2>
+          <p class="section-text">
+            Occitan Pro réunit ses membres <strong>une fois par mois, le jeudi</strong>. À chaque séance, l'une des entreprises du club présente son activité en détail : ses services, ses savoir-faire, ses besoins et ses opportunités. Puis place à un moment convivial d'échanges, de recommandations croisées et de mise en réseau entre professionnels. Un format simple, efficace, ancré dans la confiance mutuelle.
+          </p>
+          <a href="principe.html" class="btn btn-primary">Découvrir le principe du club Occitan Pro</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 2 – ENTREPRENEURS ===== -->
+  <section id="entrepreneurs">
+    <div class="container">
+      <div class="entrepreneurs-header">
+        <span class="section-tag">Nos membres</span>
+        <h2 class="section-title">Les entrepreneurs du club</h2>
+        <p class="section-text">Des professionnels locaux engagés, complémentaires et prêts à collaborer.</p>
+      </div>
+
+      <div class="cards-list">
+
+        <!-- Carte 1 -->
+        <div class="card">
+          <div class="card-photo">
+            <img src="assets/carte1.jpeg" alt="Activité entrepreneur 1" />
+          </div>
+          <div class="card-logo">
+            <img src="assets/logocarte1.png" alt="Logo entrepreneur 1" />
+          </div>
+          <div class="card-body">
+            <h3>Ludovic Lespinasse : Restaurant La Mêlée</h3>
+            <p> Il y a trois ans, Lena et Ludovic décident de franchir le pas. Mais pas n’importe comment. Ils veulent créer un établissement pédagogique et inclusif, où cuisine et service seraient réalisés par des personnes en situation de handicap...</p>
+            <a href="https://www.lamelee65.com" class="btn btn-outline" style="align-self: flex-start; margin-top: 8px;">Voir l'Entreprise</a>
+          </div>
+        </div>
+
+        <!-- Carte 2 -->
+        <div class="card">
+          <div class="card-photo">
+            <img src="assets/carte2.jpg" alt="Activité entrepreneur 2" />
+          </div>
+          <div class="card-logo">
+            <img src="assets/logocarte2.png" alt="Logo entrepreneur 2" />
+          </div>
+          <div class="card-body">
+            <h3>MICHEL HAMOND – Fermolor</h3>
+            <p>Fermolor, Menuiserie PVC, Aluminium et Bois</p>
+            <a href="https://www.fermolor.com/fr/agence-fermolor-tarbes-portes-fenetres-volets-portails-cloture-sur-mesure.html" class="btn btn-outline" style="align-self: flex-start; margin-top: 8px;">Voir l'Entreprise</a>
+          </div>
+        </div>
+
+        <!-- Carte 3 -->
+        <div class="card">
+          <div class="card-photo">
+            <img src="assets/carte3.jpg" alt="Activité entrepreneur 3" />
+          </div>
+          <div class="card-logo">
+            <img src="assets/logocarte3.jpg" alt="Logo entrepreneur 3" />
+          </div>
+          <div class="card-body">
+            <h3>FABRICE HABERER – ENTREPRISE HABERER</h3>
+            <p> Avez-vous une fuite d'eau ? HABERER est à votre disposition. Notre équipe de plombiers intervient rapidement et efficacement.</p>
+            <a href="https://www.facebook.com/profile.php?id=100066744842125&ref=br_rs" class="btn btn-outline" style="align-self: flex-start; margin-top: 8px;">Voir l'Entreprise</a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="entrepreneurs-cta">
+        <a href="entreprises.html" class="btn btn-primary btn-pulse">Découvrir tous les entrepreneurs</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 3 – CONTACT ===== -->
+  <section id="contact">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-image">
+          <img src="assets/contact.jpg" alt="Contact Occitan Pro" />
+        </div>
+        <div class="contact-text">
+          <span class="section-tag">Nous joindre</span>
+          <h2 class="section-title">Entrons en contact</h2>
+          <p class="section-text">
+            Pour contacter directement un entrepreneur, rendez-vous sur sa fiche dans la section <a href="entreprises.html" style="color:var(--red); font-weight:500;">Entreprises</a>. Pour contacter le club Occitan Pro, écrivez-nous à <strong>occitanpro@gmail.com</strong> ou appelez-nous directement.
+          </p>
+          <div class="contact-buttons">
+            <a href="tel:0676673772" class="btn btn-primary">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58z"/></svg>
+              Appeler – 06 76 67 37 72
+            </a>
+            <a href="mailto:occitanpro@gmail.com" class="btn btn-outline">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1zm13 2.383-4.708 2.825L15 11.105zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741M1 11.105l4.708-2.897L1 5.383z"/></svg>
+              Envoyer un mail
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-name">Occitan Pro</div>
+      <nav class="footer-nav">
+        <a href="index.html">Accueil</a>
+        <a href="principe.html">Principe</a>
+        <a href="entreprises.html">Entreprises</a>
+        <a href="contact.html">Contacter le club</a>
+      </nav>
+      <p class="footer-copy">&copy; 2026 Occitan Pro. Tous droits réservés. — Réalisé par <a href="https://cazacomm.fr" target="_blank" rel="noopener noreferrer" style="color:#888; text-decoration: underline;">Caza comm</a></p>
+    </div>
+  </footer>
+
+  <!-- ===== JS ===== -->
+  <script>
+    // --- BURGER MENU ---
+    const burger = document.getElementById('burger');
+    const mobileNav = document.getElementById('mobileNav');
+
+    burger.addEventListener('click', () => {
+      burger.classList.toggle('open');
+      mobileNav.classList.toggle('open');
+    });
+
+    // Close mobile nav on link click
+    mobileNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        burger.classList.remove('open');
+        mobileNav.classList.remove('open');
+      });
+    });
+
+    // --- HERO CAROUSEL ---
+    const slides = document.querySelectorAll('.hero-slide');
+    let current = 0;
+
+    function nextSlide() {
+      slides[current].classList.remove('active');
+      current = (current + 1) % slides.length;
+      slides[current].classList.add('active');
+    }
+
+    setInterval(nextSlide, 3000);
+  </script>
+
+</body>
+</html>

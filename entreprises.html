@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Les entrepreneurs – Occitan Pro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red: #c0392b;
+      --red-soft: #e74c3c;
+      --red-light: #fdecea;
+      --red-accent: #d45a50;
+      --black: #1a1a1a;
+      --gray: #555;
+      --gray-light: #f5f5f5;
+      --white: #fff;
+      --header-h: 70px;
+      --radius: 10px;
+      --shadow: 0 4px 20px rgba(0,0,0,0.08);
+      --transition: 0.3s ease;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      font-size: 15px;
+      color: var(--black);
+      background: var(--white);
+      line-height: 1.7;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+
+    /* ===== HEADER ===== */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--header-h);
+      background: var(--white);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+    }
+
+    .header-logo { height: 48px; width: auto; object-fit: contain; }
+
+    nav { display: flex; align-items: center; gap: 6px; }
+
+    nav a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--black);
+      padding: 7px 14px;
+      border-radius: 6px;
+      transition: background var(--transition), color var(--transition);
+    }
+
+    nav a:hover, nav a.active {
+      background: var(--red-light);
+      color: var(--red);
+    }
+
+    .burger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 6px;
+      background: none;
+      border: none;
+    }
+
+    .burger span {
+      display: block;
+      width: 26px;
+      height: 2px;
+      background: var(--black);
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+
+    .burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .burger.open span:nth-child(2) { opacity: 0; }
+    .burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: var(--header-h);
+      left: 0; right: 0;
+      background: var(--white);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      z-index: 999;
+      flex-direction: column;
+      padding: 16px 20px 24px;
+      gap: 4px;
+    }
+
+    .mobile-nav.open { display: flex; }
+
+    .mobile-nav a {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--black);
+      padding: 12px 16px;
+      border-radius: 8px;
+      transition: background var(--transition), color var(--transition);
+    }
+
+    .mobile-nav a:hover { background: var(--red-light); color: var(--red); }
+
+    /* ===== SHARED ===== */
+    .container { max-width: 1140px; margin: 0 auto; }
+
+    .section-tag {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--red-accent);
+      background: var(--red-light);
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 14px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 26px;
+      border-radius: 8px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+    }
+
+    .btn-primary { background: var(--red); color: var(--white); }
+    .btn-primary:hover {
+      background: #a93226;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(192,57,43,0.3);
+    }
+
+    .btn-outline { background: transparent; color: var(--red); border: 2px solid var(--red); }
+    .btn-outline:hover { background: var(--red-light); transform: translateY(-2px); }
+
+    /* ===== PAGE HERO ===== */
+    .page-hero {
+      position: relative;
+      height: 300px;
+      margin-top: var(--header-h);
+      overflow: hidden;
+      background-image: url('assets/adobestock-by-studio-gavarnie2.jpg');
+      background-size: cover;
+      background-position: center 40%;
+    }
+
+    .page-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(26,26,26,0.7) 0%, rgba(192,57,43,0.65) 100%);
+    }
+
+    .page-hero-content {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 24px 20px;
+    }
+
+    .page-hero-content h1 {
+      color: var(--white);
+      font-size: clamp(1.6rem, 4vw, 2.6rem);
+      font-weight: 700;
+      line-height: 1.25;
+      text-shadow: 0 2px 14px rgba(0,0,0,0.4);
+      max-width: 680px;
+    }
+
+    .page-hero-content p {
+      color: rgba(255,255,255,0.85);
+      margin-top: 12px;
+      font-size: 15px;
+      max-width: 480px;
+    }
+
+    /* ===== STATS BAR ===== */
+    .stats-bar {
+      background: var(--black);
+      padding: 0 20px;
+    }
+
+    .stats-bar-inner {
+      max-width: 1140px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0;
+    }
+
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 18px 28px;
+      color: #ccc;
+      font-size: 13px;
+      font-weight: 500;
+      border-right: 1px solid #2a2a2a;
+    }
+
+    .stat-item:last-child { border-right: none; }
+
+    .stat-item strong {
+      color: var(--white);
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .stat-item svg { color: var(--red-accent); flex-shrink: 0; }
+
+    /* ===== FILTER BAR ===== */
+    .filter-section {
+      background: var(--white);
+      padding: 28px 20px 0;
+    }
+
+    .filter-bar-wrap {
+      position: sticky;
+      top: var(--header-h);
+      z-index: 100;
+      background: var(--white);
+      padding: 14px 20px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+      margin: 0 -20px;
+    }
+
+    .filter-bar {
+      max-width: 1140px;
+      margin: 0 auto;
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      padding-bottom: 2px;
+    }
+
+    .filter-bar::-webkit-scrollbar { display: none; }
+
+    .filter-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      padding: 8px 16px;
+      border-radius: 24px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      border: 1.5px solid #e0e0e0;
+      background: var(--white);
+      color: var(--gray);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--red-accent);
+      color: var(--red);
+      background: var(--red-light);
+    }
+
+    .filter-btn.active {
+      background: var(--red);
+      color: var(--white);
+      border-color: var(--red);
+    }
+
+    .filter-btn .fcount {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 20px;
+      height: 20px;
+      padding: 0 5px;
+      border-radius: 10px;
+      font-size: 11px;
+      font-weight: 600;
+      background: rgba(0,0,0,0.08);
+      color: inherit;
+    }
+
+    .filter-btn.active .fcount {
+      background: rgba(255,255,255,0.25);
+    }
+
+    /* ===== SECTION MAIN ===== */
+    #membres {
+      padding: 32px 20px 80px;
+      background: var(--gray-light);
+    }
+
+    /* Count display */
+    .results-count {
+      font-size: 13px;
+      color: var(--gray);
+      margin-bottom: 24px;
+      font-weight: 500;
+    }
+
+    .results-count span {
+      color: var(--red);
+      font-weight: 600;
+    }
+
+    /* ===== CARDS GRID ===== */
+    .ent-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    /* ===== SINGLE CARD ===== */
+    .ent-card {
+      background: var(--white);
+      border-radius: 14px;
+      border: 1px solid #ececec;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      overflow: hidden;
+      position: relative;
+      /* Fade-in initial state */
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.55s ease, transform 0.55s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    .ent-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .ent-card.visible:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.13);
+      border-color: #f5c5c0;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+
+    /* Top accent line on hover */
+    .ent-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--red);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+
+    .ent-card.visible:hover::before { transform: scaleX(1); }
+
+    /* Logo area */
+    .ent-logo-wrap {
+      width: 100px;
+      height: 100px;
+      margin: 28px auto 18px;
+      border-radius: 14px;
+      background: var(--gray-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      transition: transform 0.25s ease;
+      flex-shrink: 0;
+    }
+
+    .ent-card.visible:hover .ent-logo-wrap { transform: scale(1.05); }
+
+    .ent-logo-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .ent-logo-placeholder {
+      display: none;
+      width: 100%;
+      height: 100%;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: var(--red-accent);
+      background: var(--red-light);
+    }
+
+    /* Card body */
+    .ent-body {
+      padding: 0 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .ent-sector {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--red-accent);
+      background: var(--red-light);
+      padding: 3px 10px;
+      border-radius: 16px;
+    }
+
+    .ent-company {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--black);
+      line-height: 1.25;
+      margin-top: 4px;
+    }
+
+    .ent-name {
+      font-size: 13px;
+      color: var(--gray);
+      font-weight: 400;
+    }
+
+    /* Visit button */
+    .ent-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      width: calc(100% - 32px);
+      margin: 20px 16px 20px;
+      padding: 11px 20px;
+      border-radius: 8px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--red);
+      border: 1.5px solid var(--red);
+      background: transparent;
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+      text-decoration: none;
+    }
+
+    .ent-btn:hover {
+      background: var(--red);
+      color: var(--white);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(192,57,43,0.28);
+    }
+
+    .ent-btn svg { flex-shrink: 0; transition: transform 0.2s ease; }
+    .ent-btn:hover svg { transform: translateX(3px); }
+
+    /* Hidden (filtered out) */
+    .ent-card.card-hidden { display: none; }
+
+    /* ===== NO RESULTS MESSAGE ===== */
+    .no-results {
+      display: none;
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--gray);
+    }
+
+    .no-results.show { display: block; }
+
+    /* ===== CTA SECTION ===== */
+    #cta-rejoindre {
+      padding: 80px 20px;
+      background: var(--white);
+      text-align: center;
+    }
+
+    #cta-rejoindre h2 {
+      font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    #cta-rejoindre p {
+      color: var(--gray);
+      font-size: 15px;
+      max-width: 500px;
+      margin: 0 auto 32px;
+    }
+
+    .cta-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      justify-content: center;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--black);
+      color: #aaa;
+      padding: 40px 20px;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      align-items: center;
+      text-align: center;
+    }
+
+    .footer-name { font-size: 17px; font-weight: 700; color: var(--white); }
+
+    .footer-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 20px; }
+
+    .footer-nav a {
+      font-size: 13px;
+      color: #aaa;
+      transition: color var(--transition);
+    }
+
+    .footer-nav a:hover { color: var(--white); }
+    .footer-copy { font-size: 12px; color: #666; }
+
+    /* ===== TABLET ===== */
+    @media (min-width: 540px) {
+      .ent-grid { grid-template-columns: 1fr 1fr; }
+
+      .stat-item { padding: 20px 32px; }
+
+      .footer-inner {
+        flex-direction: row;
+        justify-content: space-between;
+        text-align: left;
+        align-items: flex-start;
+      }
+    }
+
+    /* ===== DESKTOP ===== */
+    @media (min-width: 960px) {
+      header { padding: 0 48px; }
+
+      .page-hero { height: 360px; }
+
+      .filter-section { padding: 36px 48px 0; }
+      .filter-bar-wrap { padding: 14px 48px; margin: 0 -48px; }
+
+      #membres { padding: 36px 48px 100px; }
+      #cta-rejoindre { padding: 100px 48px; }
+
+      .ent-grid { grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
+
+      .burger { display: none !important; }
+      .mobile-nav, .mobile-nav.open { display: none !important; }
+      nav { display: flex !important; }
+    }
+
+    @media (max-width: 959px) {
+      nav { display: none; }
+      .burger { display: flex; }
+    }
+
+    /* ===== STAGGERED FADE-IN DELAYS ===== */
+    /* Applied via JS for cards entering viewport */
+  </style>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header>
+    <a href="index.html">
+      <img src="assets/logo.jpg" alt="Logo Occitan Pro" class="header-logo" />
+    </a>
+    <nav>
+      <a href="index.html">Accueil</a>
+      <a href="principe.html">Principe</a>
+      <a href="entreprises.html" class="active">Entreprises</a>
+      <a href="contact.html">Contacter le club</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- Mobile nav -->
+  <nav class="mobile-nav" id="mobileNav">
+    <a href="index.html">Accueil</a>
+    <a href="principe.html">Principe</a>
+    <a href="entreprises.html" class="active">Entreprises</a>
+    <a href="contact.html">Contacter le club</a>
+  </nav>
+
+  <!-- ===== PAGE HERO ===== -->
+  <div class="page-hero">
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-content">
+      <h1>Les entrepreneurs du club</h1>
+      <p>22 professionnels des Hautes-Pyrénées, unis par la confiance et la recommandation mutuelle.</p>
+    </div>
+  </div>
+
+  <!-- ===== STATS BAR ===== -->
+  <div class="stats-bar">
+    <div class="stats-bar-inner">
+      <div class="stat-item">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
+        </svg>
+        <div><strong>22</strong> membres actifs</div>
+      </div>
+      <div class="stat-item">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" />
+        </svg>
+        <div><strong>8</strong> secteurs d'activité</div>
+      </div>
+      <div class="stat-item">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+        </svg>
+        <div>Hautes-Pyrénées <strong>65</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== FILTER + GRID SECTION ===== -->
+  <section class="filter-section" id="membres-section">
+    <div class="container">
+
+      <!-- Filter bar sticky -->
+      <div class="filter-bar-wrap">
+        <div class="filter-bar" id="filterBar" role="group" aria-label="Filtrer par secteur">
+          <button class="filter-btn active" data-filter="all">
+            Tous <span class="fcount">22</span>
+          </button>
+          <button class="filter-btn" data-filter="batiment">
+            Bâtiment &amp; Travaux <span class="fcount">7</span>
+          </button>
+          <button class="filter-btn" data-filter="menuiserie">
+            Menuiserie <span class="fcount">2</span>
+          </button>
+          <button class="filter-btn" data-filter="energie">
+            Énergie &amp; Confort <span class="fcount">1</span>
+          </button>
+          <button class="filter-btn" data-filter="jardin">
+            Jardin &amp; Piscine <span class="fcount">2</span>
+          </button>
+          <button class="filter-btn" data-filter="restauration">
+            Restauration <span class="fcount">1</span>
+          </button>
+          <button class="filter-btn" data-filter="services">
+            Services aux entreprises <span class="fcount">7</span>
+          </button>
+          <button class="filter-btn" data-filter="commerce">
+            Commerce &amp; Artisanat <span class="fcount">2</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="membres" style="padding-top: 32px;">
+    <div class="container">
+
+      <p class="results-count" id="resultsCount"><span>22</span> entrepreneurs affichés</p>
+
+      <div class="ent-grid" id="entGrid">
+
+        <!-- ============================
+             CARTE 1 — MICHEL HAMOND
+             ============================ -->
+        <div class="ent-card" data-filter="menuiserie">
+          <div class="ent-logo-wrap">
+            <img src="assets/logocarte2.png" alt="Logo FERMOLOR" class="ent-logo-img"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="ent-logo-placeholder">FM</div>
+          </div>
+          <div class="ent-body">
+            <span class="ent-sector">Menuiserie extérieur</span>
+            <div class="ent-company">FERMOLOR</div>
+            <div class="ent-name">Michel HAMOND</div>
+          </div>
+          <a href="https://www.fermolor.com/fr/agence-fermolor-tarbes-portes-fenetres-volets-portails-cloture-sur-mesure.html" class="ent-btn" target="_blank" rel="noopener noreferrer">
+            Visiter le site
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+            </svg>
+          </a>
+         <!-- LIEN SITE -->
+        </div>
+
+        <!-- ============================
+             CARTE 2 — LUDOVIC LESPINASSE
+             ============================ -->
+        <div class="ent-card" data-filter="restauration">
+          <div class="ent-logo-wrap">
+            <img src="assets/logocarte1.png" alt="Logo LA MÊLÉE" class="ent-logo-img"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="ent-logo-placeholder">LM</div>
+          </div>
+          <div class="ent-body">
+            <span class="ent-sector">Restaurant · Audit DUERP</span>
+            <div class="ent-company">LA MÊLÉE</div>
+            <div class="ent-name">Ludovic LESPINASSE</div>
+          </div>
+          <a href="https://www.lamelee65.com" class="ent-btn" target="_blank" rel="noopener noreferrer">
+            Visiter le site
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+            </svg>
+          </a>
+          <!-- LIEN SITE -->
+        </div>
+
+        <!-- ============================
+             CARTE 3 — FABRICE HABERER
+             ============================ -->
+        <div class="ent-card" data-filter="batiment">
+          <div class="ent-logo-wrap">
+            <img src="assets/logocarte3.jpg" alt="Logo HABERER" class="ent-logo-img"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="ent-logo-placeholder">HA</div>
+          </div>
+          <div class="ent-body">
+            <span class="ent-sector">Électricité · Plomberie</span>
+            <div class="ent-company">HABERER</div>
+            <div class="ent-name">Fabrice HABERER</div>
+          </div>
+          <a href="https://www.facebook.com/profile.php?id=100066744842125&ref=br_rs" class="ent-btn" target="_blank" rel="noopener noreferrer">
+            Visiter le site
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+            </svg>
+          </a>
+          <!-- LIEN SITE HABERER (Fabrice Haberer) -->
+        </div>
+
+        <!-- ============================
+             CARTE 4 — PHILIPPE GRANDJEAN
+             ============================ -->
+        <div class="ent-card" data-filter="batiment">
+          <div class="ent-logo-wrap">
+            <img src="assets/logocarte4.png" alt="Logo AGIR ELEC" class="ent-logo-img"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="ent-logo-placeholder">AE</div>
+          </div>
+          <div class="ent-body">
+            <span class="ent-sector">Électricité</span>
+            <div class="ent-company">AGIR ELEC</div>
+            <div class="ent-name">Philippe GRANDJEAN</div>
+          </div>
+          <a href="https://www.facebook.com/agirelec65/?locale=fr_FR" class="ent-btn" target="_blank" rel="noopener noreferrer">
+            Visiter le site
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+            </svg>
+          </a>
+          <!-- LIEN SITE AGIR ELEC (Philippe Grandjean) -->
+        </div>
+
+        <!-- ============================
+             CARTE 5 — STEPHAN LEFORT
+             ============================ -->
+        <div class="ent-card" data-filter="services">
+          <div class="ent-logo-wrap">
+            <img src="assets/logocarte5.png" alt="Logo LEFORT Photographe" class="ent-logo-img"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="ent-logo-placeholder">LE</div>
+          </div>
+          <div class="ent-body">
+            <span class="ent-sector">Photographe</span>
+            <div class="ent-company">LEFORT</div>
+            <div class="ent-name">Stephan LEFORT</div>
+          </div>
+          <a href="https://stephan-lefort.fr" class="ent-btn" target="_blank" rel="noopener noreferrer">
+            Visiter le site
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+            </svg>
+          </a>
+          <!-- LIEN SITE LEFORT Photographe (Stephan Lefort) -->
+        </div>
+
+        <!-- ============================
+             CARTE 6 — CHRISTIAN DULIN
+             ============================ -->
+        <div class="ent-card" data-filter="batiment">
+          <div class="ent-logo-wrap">
+            <img src="assets/logocarte6.png" alt="Logo SUD DIAGNOSTIC BÂTIMENT" class="ent-logo-img"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="ent-logo-placeholder">SD</div>
+          </div>
+          <div class="ent-body">
+            <span class="ent-sector">Diagnostic bâtiment</span>
+            <div class="ent-company">SUD DIAGNOSTIC BÂTIMENT</div>
+            <div class="ent-name">Christian DULIN</div>
+          </div>
+          <a href="https://www.sud-diagnostic.fr" class="ent-btn" target="_blank" rel="noopener noreferrer">
+            Visiter le site
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+            </svg>
+          </a>
+          <!-- LIEN SITE SUD DIAGNOSTIC BÂTIMENT (Christian Dulin) -->
+        </div>
+
+        <!-- ============================
+             CARTE 7 — AUDRY RABOT
+             ============================ -->
+        <div class="ent-card" data-filter="services">
+          <div class="ent-logo-wrap">
+            <img src="assets/logocarte7.png" alt="Logo AUDRY SERVICES" class="ent-logo-img"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="ent-logo-placeholder">AS</div>
+          </div>
+          <div class="ent-body">
+            <span class="ent-sector">Multi-services</span>
+            <div class="ent-company">AUDRY SERVICES</div>
+            <div class="ent-name">Audry RABOT</div>
+          </div>
+          <a href="https://share.google/FON2TBeVyfzFAdrul" class="ent-btn" target="_blank" rel="noopener noreferrer">
+            Visiter le site
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+            </svg>
+          </a>
+          <!-- LIEN SITE AUDRY SERVICES (Audry Rabot) -->
+        </div>
+
+        <!-- ============================
+             CARTE 8 — BARQUERO & LEBRUN (2 associés)
+             ============================ -->
+        <div class="ent-card" data-filter="energie">
+          <div class="ent-logo-wrap">
+            <img src="assets/logocarte8.jpeg" alt="Logo ADOUR FROID SERVICES" class="ent-logo-img"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="ent-logo-placeholder">AF</div>
+          </div>
+          <div class="ent-body">
+            <span class="ent-sector">Chauffage · Climatisation</span>
+            <div class="ent-company">ADOUR FROID SERVICES</div>
+            <div class="ent-name">Nicolas BARQUERO &amp; Philippe LEBRUN</div>
+          </div>
+          <a href="https://www.facebook.com/AdourFroidServices/?locale=fr_FR" class="ent-btn" target="_blank" rel="noopener noreferrer">
+            Visiter le site
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+            </svg>
+          </a>
+          <!-- LIEN SITE ADOUR FROID SERVICES (Barquero & Lebrun) -->
+        </div>
+
+        <!-- ============================
+             CARTE 9 — NATHALIE GAYE
+             ============================ -->
+        <div class="ent-card" data-filter="services">
+          <div class="ent-logo-wrap">
+            <img src="assets/logocarte9.jpg" alt="Logo NLG CONSEIL" class="ent-logo-img"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="ent-logo-placeholder">NG</div>
+          </div>
+          <div class="ent-body">
+            <span class="ent-sector">Conseil en gestion TPE</span>
+            <div class="ent-company">NLG CONSEIL</div>
+            <div class="ent-name">Nathalie GAYE</div>
+          </div>
+          <a href="https://www.facebook.com/nlgconseil/" class="ent-btn" target="_blank" rel="noopener noreferrer">
+            Visiter le site
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+            </svg>
+          </a>
+          <!-- LIEN SITE NLG CONSEIL (Nathalie Gaye) -->
+        </div>
+
+        <!-- ============================
+             CARTE 10 — PIERRE FANEUIL
+             ============================ -->
+        <div class="ent-card" data-filter="jardin">
+          <div class="ent-logo-wrap">
+            <img src="assets/logocarte10.webp" alt="Logo JARDIN CONCEPT" class="ent-logo-img"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="ent-logo-placeholder">JC</div>
+          </div>
+          <div class="ent-body">
+            <span class="ent-sector">Jardin · Espace vert</span>
+            <div class="ent-company">JARDIN CONCEPT</div>
+            <div class="ent-name">Pierre FANEUIL</div>
+          </div>
+          <a href="https://www.jardinconcept65.fr" class="ent-btn" target="_blank" rel="noopener noreferrer">
+            Visiter le site
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+            </svg>
+          </a>
+          <!-- LIEN SITE JARDIN CONCEPT (Pierre Faneuil) -->
+        </div>
+
+        <!-- ============================
+             CARTE 11 — PATRICK MORNET
+             ============================ -->
+        <div class="ent-card" data-filter="jardin">
+          <div class="ent-logo-wrap">
+            <img src="assets/logocarte11.png" alt="Logo NORATLAS" class="ent-logo-img"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="ent-logo-placeholder">NO</div>
+          </div>
+          <div class="ent-body">
+            <span class="ent-sector">Pisciniste</span>
+            <div class="ent-company">NORATLAS</div>
+            <div class="ent-name">Patrick MORNET</div>
+          </div>
+          <a href="https://www.noratlas.net" class="ent-btn" target="_blank" rel="noopener noreferrer">
+            Visiter le site
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+            </svg>
+          </a>
+          <!-- LIEN SITE NORATLAS (Patrick Mornet) -->
+        </div>
+
+        <!-- ============================
+             CARTE 12 — BERNARD FARGEAS
+             ============================ -->
+        <div class="ent-card" data-filter="batiment">
+          <div class="ent-logo-wrap">
+            <img src="assets/logocarte12.jpg" alt="Logo BIGORRE THERMOLAQUAGE" class="ent-logo-img"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="ent-logo-placeholder">BT</div>
+          </div>
+          <div class="ent-body">
+            <span class="ent-sector">Thermolaquage</span>
+            <div class="ent-company">BIGORRE THERMOLAQUAGE</div>
+            <div class="ent-name">Bernard FARGEAS</div>
+          </div>
+          <a href="https://bigorre-thermolaquage.fr" class="ent-btn" target="_blank" rel="noopener noreferrer">
+            Visiter le site
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+            </svg>
+          </a>
+          <!-- LIEN SITE BIGORRE THERMOLAQUAGE (Bernard Fargeas) -->
+        </div>
+
+        <!-- ============================
+             CARTE 13 — LUCIEN MAKHOUL
+             ============================ -->
+        <div class="ent-card" data-filter="batiment">
+          <div class="ent-logo-wrap">
+            <img src="assets/logocarte13.png" alt="Logo JTA PLAQUISTE" class="ent-logo-img"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="ent-logo-placeholder">JP</div>
+          </div>
+          <div class="ent-body">
+            <span class="ent-sector">Plaquiste</span>
+            <div class="ent-company">JTA PLAQUISTE</div>
+            <div class="ent-name">Lucien MAKHOUL</div>
+          </div>
+          <a href="https://jta-plaquiste.fr" class="ent-btn" target="_blank" rel="noopener noreferrer">
+            Visiter le site
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+            </svg>
+          </a>
+          <!-- LIEN SITE JTA PLAQUISTE (Lucien Makhoul) -->
+        </div>
+
+        <!-- ============================
+             CARTE 14 — GÉRARD VIGNES
+             ============================ -->
+        <div class="ent-card" data-filter="batiment">
+          <div class="ent-logo-wrap">
+            <img src="assets/logocarte14.png" alt="Logo ETS A&G" class="ent-logo-img"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="ent-logo-placeholder">AG</div>
+          </div>
+          <div class="ent-body">
+            <span class="ent-sector">Charpente</span>
+            <div class="ent-company">ETS A&amp;G</div>
+            <div class="ent-name">Gérard VIGNES</div>
+          </div>
+          <a href="https://www.ets-aetg-occitanie.fr" class="ent-btn" target="_blank" rel="noopener noreferrer">
+            Visiter le site
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+            </svg>
+          </a>
+          <!-- LIEN SITE ETS A&G (Gérard Vignes) -->
+        </div>
+
+        <!-- ============================
+             CARTE 15 — ALTOR GOTI
+             ============================ -->
+        <div class="ent-card" data-filter="services">
+          <div class="ent-logo-wrap">
+            <img src="assets/logocarte15.webp" alt="Logo BANQUE POPULAIRE OCCITANE" class="ent-logo-img"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="ent-logo-placeholder">BP</div>
+          </div>
+          <div class="ent-body">
+            <span class="ent-sector">Finance · Banque</span>
+            <div class="ent-company">BANQUE POPULAIRE OCCITANE</div>
+            <div class="ent-name">Altor GOTI</div>
+          </div>
+          <a href="https://www.banquepopulaire.fr/occitane/" class="ent-btn" target="_blank" rel="noopener noreferrer">
+            Visiter le site
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+            </svg>
+          </a>
+          <!-- LIEN SITE BANQUE POPULAIRE OCCITANE (Altor Goti) -->
+        </div>
+
+        <!-- ============================
+             CARTE 16 — SIMON REYNETTE
+             ============================ -->
+        <div class="ent-card" data-filter="menuiserie">
+          <div class="ent-logo-wrap">
+            <img src="assets/logocarte2.png" alt="Logo FERMOLOR" class="ent-logo-img"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="ent-logo-placeholder">FM</div>
+          </div>
+          <div class="ent-body">
+            <span class="ent-sector">Menuiserie extérieur</span>
+            <div class="ent-company">FERMOLOR</div>
+            <div class="ent-name">Simon REYNETTE</div>
+          </div>
+          <a href="https://www.fermolor.com" class="ent-btn" target="_blank" rel="noopener noreferrer">
+            Visiter le site
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+            </svg>
+          </a>
+          <!-- LIEN SITE FERMOLOR (Simon Reynette) -->
+        </div>
+
+        <!-- ============================
+             CARTE 17 — RASHO AJAMYAN
+             ============================ -->
+        <div class="ent-card" data-filter="batiment">
+          <div class="ent-logo-wrap">
+            <img src="assets/logocarte17.jpg" alt="Logo SAS AJAMYAN CONSTRUCTION" class="ent-logo-img"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="ent-logo-placeholder">AC</div>
+          </div>
+          <div class="ent-body">
+            <span class="ent-sector">Maçonnerie</span>
+            <div class="ent-company">SAS AJAMYAN CONSTRUCTION</div>
+            <div class="ent-name">Rasho AJAMYAN</div>
+          </div>
+          <a href="https://share.google/uo3rO5axmfpzb9iPD" class="ent-btn" target="_blank" rel="noopener noreferrer">
+            Visiter le site
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+            </svg>
+          </a>
+          <!-- LIEN SITE SAS AJAMYAN CONSTRUCTION (Rasho Ajamyan) -->
+        </div>
+
+        <!-- ============================
+             CARTE 18 — OLIVIER SALLABERRY
+             ============================ -->
+        <div class="ent-card" data-filter="services">
+          <div class="ent-logo-wrap">
+            <img src="assets/logocarte18.jpg" alt="Logo ASSUR65" class="ent-logo-img"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="ent-logo-placeholder">A6</div>
+          </div>
+          <div class="ent-body">
+            <span class="ent-sector">Courtier assurance</span>
+            <div class="ent-company">ASSUR65</div>
+            <div class="ent-name">Olivier SALLABERRY</div>
+          </div>
+          <a href="https://share.google/9KJ2LIgrDlrE6bCCz" class="ent-btn" target="_blank" rel="noopener noreferrer">
+            Visiter le site
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+            </svg>
+          </a>
+          <!-- LIEN SITE ASSUR65 (Olivier Sallaberry) -->
+        </div>
+
+        <!-- ============================
+             CARTE 19 — DEBORAH CARPENTIER
+             ============================ -->
+        <div class="ent-card" data-filter="commerce">
+          <div class="ent-logo-wrap">
+            <img src="assets/logocarte19.png" alt="Logo CUISALINE" class="ent-logo-img"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="ent-logo-placeholder">CU</div>
+          </div>
+          <div class="ent-body">
+            <span class="ent-sector">Cuisiniste</span>
+            <div class="ent-company">CUISALINE</div>
+            <div class="ent-name">Deborah CARPENTIER</div>
+          </div>
+          <a href="https://ginko-tarbes.com" class="ent-btn" target="_blank" rel="noopener noreferrer">
+            Visiter le site
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+            </svg>
+          </a>
+          <!-- LIEN SITE CUISALINE (Deborah Carpentier) -->
+        </div>
+
+        <!-- ============================
+             CARTE 20 — RÉMI GREGO
+             ============================ -->
+        <div class="ent-card" data-filter="commerce">
+          <div class="ent-logo-wrap">
+            <img src="assets/logocarte20.jpeg" alt="Logo DIESEL KENNEDY" class="ent-logo-img"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="ent-logo-placeholder">DK</div>
+          </div>
+          <div class="ent-body">
+            <span class="ent-sector">Automobile · Garage</span>
+            <div class="ent-company">DIESEL KENNEDY</div>
+            <div class="ent-name">Rémi GREGO</div>
+          </div>
+          <a href="https://share.google/a55ZJ45FPunopKqyF" class="ent-btn" target="_blank" rel="noopener noreferrer">
+            Visiter le site
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+            </svg>
+          </a>
+          <!-- LIEN SITE DIESEL KENNEDY (Rémi Grego) -->
+        </div>
+
+        <!-- ============================
+             CARTE 21 — CÉCILE CAZENEUVE
+             ============================ -->
+        <div class="ent-card" data-filter="services">
+          <div class="ent-logo-wrap">
+            <img src="assets/logocarte21.jpg" alt="Logo Les P'tits Papiers" class="ent-logo-img"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="ent-logo-placeholder">PP</div>
+          </div>
+          <div class="ent-body">
+            <span class="ent-sector">Gestion administrative</span>
+            <div class="ent-company">LES P'TITS PAPIERS</div>
+            <div class="ent-name">Cécile CAZENEUVE</div>
+          </div>
+          <a href="https://www.facebook.com/lesptitspapierssudouest/" class="ent-btn" target="_blank" rel="noopener noreferrer">
+            Visiter le site
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+            </svg>
+          </a>
+          <!-- LIEN SITE LES P'TITS PAPIERS (Cécile Cazeneuve) -->
+        </div>
+
+        <!-- ============================
+             CARTE 22 — JEREMY POGUT
+             ============================ -->
+        <div class="ent-card" data-filter="services">
+          <div class="ent-logo-wrap">
+            <img src="assets/logocarte22.png" alt="Logo CAZA COM" class="ent-logo-img"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="ent-logo-placeholder">CC</div>
+          </div>
+          <div class="ent-body">
+            <span class="ent-sector">Solutions IA & Site Internet</span>
+            <div class="ent-company">CAZA COM</div>
+            <div class="ent-name">Jeremy POGUT</div>
+          </div>
+          <a href="https://www.cazacomm.fr" class="ent-btn" target="_blank" rel="noopener noreferrer">
+            Visiter le site
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+            </svg>
+          </a>
+          <!-- LIEN SITE CAZA COM (Jeremy Pogut) -->
+        </div>
+
+        <!-- No results message -->
+        <div class="no-results" id="noResults">
+          <p style="font-size:16px; font-weight:600; color: var(--black); margin-bottom: 8px;">Aucun membre dans cette catégorie.</p>
+          <p>Essayez un autre filtre ou affichez tous les membres.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA — REJOINDRE ===== -->
+  <section id="cta-rejoindre">
+    <div class="container">
+      <span class="section-tag">Vous êtes entrepreneur ?</span>
+      <h2>Rejoignez le club Occitan Pro</h2>
+      <p>Vous êtes professionnel dans les Hautes-Pyrénées et souhaitez développer votre activité par la recommandation ? Contactez-nous — on vous expliquera tout.</p>
+      <div class="cta-buttons">
+        <a href="contact.html" class="btn btn-primary">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+          </svg>
+          Contacter le club
+        </a>
+        <a href="principe.html" class="btn btn-outline">
+          Découvrir le principe
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-name">Occitan Pro</div>
+      <nav class="footer-nav">
+        <a href="index.html">Accueil</a>
+        <a href="principe.html">Principe</a>
+        <a href="entreprises.html">Entreprises</a>
+        <a href="contact.html">Contacter le club</a>
+      </nav>
+      <p class="footer-copy">&copy; 2026 Occitan Pro. Tous droits réservés. — Réalisé par <a href="https://cazacomm.fr" target="_blank" rel="noopener noreferrer" style="color:#888; text-decoration: underline;">Caza comm</a></p>
+    </div>
+  </footer>
+
+  <!-- ===== JAVASCRIPT ===== -->
+  <script>
+    // ---- BURGER MENU ----
+    const burger = document.getElementById('burger');
+    const mobileNav = document.getElementById('mobileNav');
+
+    burger.addEventListener('click', () => {
+      burger.classList.toggle('open');
+      mobileNav.classList.toggle('open');
+    });
+
+    mobileNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        burger.classList.remove('open');
+        mobileNav.classList.remove('open');
+      });
+    });
+
+    // ---- FILTER ----
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.ent-card');
+    const resultsCount = document.getElementById('resultsCount');
+    const noResults = document.getElementById('noResults');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.dataset.filter;
+
+        // Update active button
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        // Show/hide cards
+        let visibleCount = 0;
+        cards.forEach(card => {
+          const matches = filter === 'all' || card.dataset.filter === filter;
+          if (matches) {
+            card.classList.remove('card-hidden');
+            visibleCount++;
+          } else {
+            card.classList.add('card-hidden');
+          }
+        });
+
+        // Update count
+        const plural = visibleCount > 1 ? 's' : '';
+        resultsCount.innerHTML = '<span>' + visibleCount + '</span> entrepreneur' + plural + ' affiché' + plural;
+
+        // No results message
+        noResults.classList.toggle('show', visibleCount === 0);
+      });
+    });
+
+    // ---- FADE-IN ON SCROLL ----
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -40px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          // Stagger delay based on position in grid
+          const card = entry.target;
+          const index = Array.from(cards).indexOf(card);
+          const delay = (index % 3) * 80; // stagger per column
+          setTimeout(() => {
+            card.classList.add('visible');
+          }, delay);
+          observer.unobserve(card);
+        }
+      });
+    }, observerOptions);
+
+    cards.forEach(card => observer.observe(card));
+  </script>
+
+</body>
+</html>

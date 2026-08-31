@@ -6,13 +6,22 @@
     <description>Réseautage, recommandation entre professionnels et vie du club d'entrepreneurs des Hautes-Pyrénées.</description>
     <language>fr-FR</language>
     <copyright>Occitan Pro</copyright>
-    <lastBuildDate>Mon, 24 Aug 2026 09:00:00 +0200</lastBuildDate>
+    <lastBuildDate>Mon, 31 Aug 2026 09:00:00 +0200</lastBuildDate>
     <atom:link href="https://occitanpro.com/rss.xml" rel="self" type="application/rss+xml" />
     <image>
       <url>https://occitanpro.com/assets/logo.jpg</url>
       <title>Blog Occitan Pro</title>
       <link>https://occitanpro.com/blog/</link>
     </image>
+
+    <item>
+      <title>Coordonner vos rénovations en Bigorre</title>
+      <link>https://occitanpro.com/blog/travaux-renovation-bigorre-quel-ordre-faire-intervenir/</link>
+      <guid isPermaLink="true">https://occitanpro.com/blog/travaux-renovation-bigorre-quel-ordre-faire-intervenir/</guid>
+      <pubDate>Mon, 31 Aug 2026 09:00:00 +0200</pubDate>
+      <category>Réseau local</category>
+      <description>Rénover une maison ou un appartement dans les Hautes-Pyrénées est un projet exaltant, mais il nécessite une organisation rigoureuse. Que vous soyez à Tarbes, Orleix ou ailleurs en Bigorre, bien coordonner les interventions des artisans est crucial. Électricien, plombier, plaquiste et peintre doivent intervenir dans…</description>
+    </item>
 
     <item>
       <title>Intégrer le club Occitan Pro à Tarbes</title>

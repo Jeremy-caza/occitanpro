@@ -38,7 +38,7 @@
 
   <url>
     <loc>https://occitanpro.com/blog/</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-08-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -60,6 +60,13 @@
   <url>
     <loc>https://occitanpro.com/blog/rejoindre-club-entrepreneurs-tarbes-s-attendre-6/</loc>
     <lastmod>2026-08-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://occitanpro.com/blog/travaux-renovation-bigorre-quel-ordre-faire-intervenir/</loc>
+    <lastmod>2026-08-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

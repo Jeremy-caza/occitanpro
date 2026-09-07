@@ -6,13 +6,22 @@
     <description>Réseautage, recommandation entre professionnels et vie du club d'entrepreneurs des Hautes-Pyrénées.</description>
     <language>fr-FR</language>
     <copyright>Occitan Pro</copyright>
-    <lastBuildDate>Mon, 31 Aug 2026 09:00:00 +0200</lastBuildDate>
+    <lastBuildDate>Mon, 07 Sep 2026 09:00:00 +0200</lastBuildDate>
     <atom:link href="https://occitanpro.com/rss.xml" rel="self" type="application/rss+xml" />
     <image>
       <url>https://occitanpro.com/assets/logo.jpg</url>
       <title>Blog Occitan Pro</title>
       <link>https://occitanpro.com/blog/</link>
     </image>
+
+    <item>
+      <title>Briser l'isolement professionnel dans le 65</title>
+      <link>https://occitanpro.com/blog/etre-independant-65-comment-sortir-isolement-professionnel/</link>
+      <guid isPermaLink="true">https://occitanpro.com/blog/etre-independant-65-comment-sortir-isolement-professionnel/</guid>
+      <pubDate>Mon, 07 Sep 2026 09:00:00 +0200</pubDate>
+      <category>Réseau local</category>
+      <description>Être indépendant dans les Hautes-Pyrénées, c'est souvent synonyme de liberté, mais aussi de solitude. Se retrouver seul face à des décisions cruciales peut être déstabilisant. Heureusement, il existe des solutions pour rompre cet isolement, grâce à des réseaux d'entraide locaux. Le club Occitan Pro, par exemple,…</description>
+    </item>
 
     <item>
       <title>Coordonner vos rénovations en Bigorre</title>
